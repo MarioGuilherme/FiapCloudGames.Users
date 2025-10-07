@@ -21,10 +21,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Baixar as dependências (dotnet restore)
-        run: dotnet restore FiapCloudGames.Games.sln
+        run: dotnet restore FiapCloudGames.Users.sln
 
       - name: Compilar a aplicação
-        run: dotnet build FiapCloudGames.Games.sln
+        run: dotnet build FiapCloudGames.Users.sln
 
       - name: Execução dos testes unitários
-        run: dotnet test FiapCloudGames.Games.sln
+        run: dotnet test FiapCloudGames.Users.sln
