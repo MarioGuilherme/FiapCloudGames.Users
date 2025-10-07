@@ -18,7 +18,7 @@ git clone https://github.com/MarioGuilherme/FiapCloudGames.Users && cd .\FiapClo
   
   _(O BANCO DE DADOS É CRIADO AUTOMATICAMENTE QUANDO O PROJETO É INICIADO, SEM PRECISAR EXECUTAR O ```Database-Update```)_:
   ```
-  dotnet run
+  dotnet run --launch-profile https
   ```
   3 - Acesse https://localhost:7246/swagger/index.html
 
