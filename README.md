@@ -35,6 +35,7 @@ git clone https://github.com/MarioGuilherme/FiapCloudGames.Users && cd .\FiapClo
 ## 🛠️ Tecnologias e Afins
 - .NET 8 com C# 12;
 - ASP.NET Core;
+- Logs Distribuídos com CorrelationId;
 - Uso de Middlewares e IActionFilters;
 - EntityFrameworkCore;
 - SQL SERVER;
