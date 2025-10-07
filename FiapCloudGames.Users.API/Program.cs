@@ -21,7 +21,7 @@ Log.Logger = new LoggerConfiguration()
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddInfrastructure(builder.Configuration)
+    .AddInfrastructure()
     .AddApplication(builder.Configuration);
 
 builder.Services
