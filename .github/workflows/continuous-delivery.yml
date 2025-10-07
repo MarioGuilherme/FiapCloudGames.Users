@@ -1,0 +1,59 @@
+name: ContinuousD - Publicação da aplicação ao Azure Container App
+
+on:
+  push:
+    branches:
+      - master
+env:
+  FiapCloudGamesUsersConnectionString: ${{ secrets.DB_CONNECTION_STRING }}
+  
+jobs:
+  deploy:
+    name: Executando o Job de Publicação
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonagem do código fonte
+        uses: actions/checkout@v4
+
+      - name: Docker Login
+        uses: docker/login-action@v3.4.0
+        with:
+          username: 'marioguilhermedev'
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Build Docker image
+        run: docker build -t marioguilhermedev/fiapcloudgamesusers:latest .
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v6.18.0
+        with:
+          context: .
+          tags: 'marioguilhermedev/fiapcloudgamesusers:latest'
+          push: true
+
+      - name: Azure Login
+        uses: Azure/login@v2.3.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download do SDK do .NET
+        uses: actions/setup-dotnet@v3.4.2
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Baixar as dependências (dotnet restore)
+        run: dotnet restore FiapCloudGames.Users.sln
+
+      - name: Compilar a aplicação
+        run: dotnet build FiapCloudGames.Users.sln
+        
+      - name: Publicar o projeto
+        run: dotnet publish FiapCloudGames.Users.sln --configuration Release --output ./publish
+
+      - name: Deploy para o Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: projetofiapusers
+          slot-name: production
+          package: ./publish
