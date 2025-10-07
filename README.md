@@ -18,9 +18,9 @@ git clone https://github.com/MarioGuilherme/FiapCloudGames.Users && cd .\FiapClo
   
   _(O BANCO DE DADOS É CRIADO AUTOMATICAMENTE QUANDO O PROJETO É INICIADO, SEM PRECISAR EXECUTAR O ```Database-Update```)_:
   ```
-  docker-compose up
+  dotnet run
   ```
-  3 - Acesse https://localhost:8081/swagger/index.html
+  3 - Acesse https://localhost:7246/swagger/index.html
 
 ### 🧪 Executar testes
   1 - Navegue até o diretório dos testes:
