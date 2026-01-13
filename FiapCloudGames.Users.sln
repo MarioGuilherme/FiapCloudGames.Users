@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11312.151 d18.0
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiapCloudGames.Users.Domain", "FiapCloudGames.Users.Domain\FiapCloudGames.Users.Domain.csproj", "{E62D144B-6D5B-4D09-BB50-8423658D0EE5}"
 EndProject
@@ -15,6 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiapCloudGames.Users.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{B697F958-4C4D-4D65-959E-8DC320EF74A1}"
 	ProjectSection(SolutionItems) = preProject
+		sqlserver.yaml = sqlserver.yaml
 		users-api.yaml = users-api.yaml
 	EndProjectSection
 EndProject
