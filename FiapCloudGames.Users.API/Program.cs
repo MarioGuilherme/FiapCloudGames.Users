@@ -11,17 +11,12 @@ using Serilog;
 Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] (CorrelationId={CorrelationId}) {Message:lj} {NewLine}{Exception}")
-    .WriteTo.NewRelicLogs(
-        endpointUrl: "https://log-api.newrelic.com/log/v1",
-        insertKey: "3F76176BC7D48FB62A252DB7AB0C62708B59B3DCA903928062C304AE327DF776",
-        licenseKey: "7a51751afd870f032bf67a4ad3600db4FFFFNRAL",
-        applicationName: "FiapCloudGames.Users")
     .CreateLogger();
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddInfrastructure()
+    .AddInfrastructure(builder.Configuration)
     .AddApplication(builder.Configuration);
 
 builder.Services
@@ -92,7 +87,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseMiddleware<CorrelationIdMiddleware>();
-app.UseMiddleware<GatewayAuthMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();

@@ -1,7 +1,10 @@
 ﻿using FiapCloudGames.Users.Application;
 using FiapCloudGames.Users.Application.Interfaces;
 using FiapCloudGames.Users.Application.Services;
+using FiapCloudGames.Users.Application.Subscribers;
 using FiapCloudGames.Users.Application.Validators;
+using FiapCloudGames.Users.Domain.Services;
+using FiapCloudGames.Users.Infrastructure.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -17,10 +20,30 @@ public static class ApplicationModule
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         services
+            .AddEmailService(configuration)
+            .AddSubscribers()
             .AddAuthentication(configuration)
             .AddFluentValidation()
             .AddApplicationServices();
 
+        return services;
+    }
+
+    private static IServiceCollection AddEmailService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddSingleton<IEmailService, SendGridEmailService>(_ =>
+        {
+            string apiKey = configuration.GetValue<string>("SendGrid:ApiKey")!;
+            string senderEmail = configuration.GetValue<string>("SendGrid:SenderEmail")!;
+            return new(apiKey, senderEmail);
+        });
+
+        return services;
+    }
+
+    private static IServiceCollection AddSubscribers(this IServiceCollection services)
+    {
+        services.AddHostedService<SendPendingEmailSubscriber>();
         return services;
     }
 
