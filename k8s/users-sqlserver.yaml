@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sqlserver
+  name: users-sqlserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sqlserver
+      app: users-sqlserver
   template:
     metadata:
       labels:
-        app: sqlserver
+        app: users-sqlserver
     spec:
       containers:
       - name: sqlserver
@@ -21,14 +21,19 @@ spec:
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
-          value: "Adm1n23%"
+          value: "Users!Passw0rd"
+        resources:
+          limits:
+            memory: "1.5Gi"
+            cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: sqlserver
+  name: users-sqlserver
 spec:
   selector:
-    app: sqlserver
+    app: users-sqlserver
   ports:
   - port: 1433
+    targetPort: 1433

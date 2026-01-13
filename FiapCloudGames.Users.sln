@@ -15,8 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiapCloudGames.Users.Tests"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{B697F958-4C4D-4D65-959E-8DC320EF74A1}"
 	ProjectSection(SolutionItems) = preProject
-		sqlserver.yaml = sqlserver.yaml
-		users-api.yaml = users-api.yaml
+		k8s\users-api.yaml = k8s\users-api.yaml
+		k8s\users-configmap.yaml = k8s\users-configmap.yaml
+		k8s\users-hpa.yaml = k8s\users-hpa.yaml
+		k8s\users-secret.yaml = k8s\users-secret.yaml
+		k8s\users-service.yaml = k8s\users-service.yaml
+		k8s\users-sqlserver.yaml = k8s\users-sqlserver.yaml
 	EndProjectSection
 EndProject
 Global

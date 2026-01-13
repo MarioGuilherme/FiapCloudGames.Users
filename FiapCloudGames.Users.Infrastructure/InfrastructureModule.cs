@@ -15,7 +15,7 @@ public static class InfrastructureModule
     {
         services
             .AddMessageBroker(configuration)
-            .AddDbContext()
+            .AddDbContext(configuration)
             .AddRepositories();
 
         return services;
@@ -31,11 +31,15 @@ public static class InfrastructureModule
         return services;
     }
 
-    private static IServiceCollection AddDbContext(this IServiceCollection services)
+    private static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        string connectionString = "Server=sqlserver;Database=FiapCloudGamesUsers;User Id=sa;Password=Adm1n23%;TrustServerCertificate=True";
-        services.AddDbContext<FiapCloudGamesUsersDbContext>(options => options.UseSqlServer(connectionString));
+        string dbHost = configuration["Database:Host"]!;
+        string dbName = configuration["Database:Name"]!;
+        string dbUser = configuration["DB_USER"]!;
+        string dbPassword = configuration["DB_PASSWORD"]!;
+        string connectionString = $"Server={dbHost};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True";
 
+        services.AddDbContext<FiapCloudGamesUsersDbContext>(options => options.UseSqlServer(connectionString));
         return services;
     }
 
