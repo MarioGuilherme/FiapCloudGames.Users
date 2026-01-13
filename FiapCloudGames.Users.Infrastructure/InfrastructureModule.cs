@@ -33,12 +33,7 @@ public static class InfrastructureModule
 
     private static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        string dbHost = configuration["Database:Host"]!;
-        string dbName = configuration["Database:Name"]!;
-        string dbUser = configuration["DB_USER"]!;
-        string dbPassword = configuration["DB_PASSWORD"]!;
-        string connectionString = $"Server={dbHost};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True";
-
+        string connectionString = configuration.GetConnectionString("DefaultConnection")!;
         services.AddDbContext<FiapCloudGamesUsersDbContext>(options => options.UseSqlServer(connectionString));
         return services;
     }

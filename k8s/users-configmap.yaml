@@ -7,3 +7,5 @@ data:
   RabbitMq__Host: rabbitmq
   RabbitMq__Port: "5672"
   RabbitMQ__Exchange: "fiap-cloud-games.exchange"
+  Jwt__Issuer: FiapCloudGames.Users.API
+  Jwt__Audience: ClientFiapCloudGames
