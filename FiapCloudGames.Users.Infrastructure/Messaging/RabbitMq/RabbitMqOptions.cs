@@ -7,6 +7,4 @@ public class RabbitMqOptions
     public string Username { get; set; } = default!;
     public string Password { get; set; } = default!;
     public string Exchange { get; set; } = default!;
-    public string RoutingKey { get; set; } = default!;
-    public IEnumerable<string> Queues { get; set; } = default!;
 }

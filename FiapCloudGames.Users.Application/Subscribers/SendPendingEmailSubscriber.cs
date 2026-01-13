@@ -51,6 +51,8 @@ public class SendPendingEmailSubscriber(IServiceProvider serviceProvider, IOptio
 
     private async Task ProcessSendPendingEmailAsync(SendPendingEmailEvent sendPendingEmailEvent)
     {
+        Log.Information("Subscriber {SubscriberName} iniciado às {DateTime}", nameof(SendPendingEmailSubscriber), DateTime.Now);
+
         using IServiceScope scope = _serviceProvider.CreateScope();
         IUserRepository userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
         IEmailService emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
@@ -58,5 +60,7 @@ public class SendPendingEmailSubscriber(IServiceProvider serviceProvider, IOptio
         User user = (await userRepository.GetByIdTrackingAsync(sendPendingEmailEvent.UserId))!;
 
         await emailService.SendEmailAsync(user.Email, sendPendingEmailEvent.Subject, sendPendingEmailEvent.HtmlContent);
+
+        Log.Information("Subscriber {SubscriberName} finalizado às {DateTime}", nameof(SendPendingEmailSubscriber), DateTime.Now);
     }
 }

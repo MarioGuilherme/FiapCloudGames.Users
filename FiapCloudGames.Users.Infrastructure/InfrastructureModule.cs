@@ -33,7 +33,7 @@ public static class InfrastructureModule
 
     private static IServiceCollection AddDbContext(this IServiceCollection services)
     {
-        string connectionString = "Server=(localdb)\\mssqllocaldb;Database=FiapCloudGamesUsers;Trusted_Connection=True;MultipleActiveResultSets=true";// Environment.GetEnvironmentVariable("FiapCloudGamesUsersConnectionString")!;
+        string connectionString = "Server=sqlserver;Database=FiapCloudGamesUsers;User Id=sa;Password=Adm1n23%;TrustServerCertificate=True";
         services.AddDbContext<FiapCloudGamesUsersDbContext>(options => options.UseSqlServer(connectionString));
 
         return services;
