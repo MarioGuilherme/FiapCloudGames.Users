@@ -44,3 +44,5 @@ git clone https://github.com/MarioGuilherme/FiapCloudGames.Users && cd .\FiapClo
 - xUnit junto com Moq;
 - Autenticação JWT;
 - Segurança de Criptografia com BCrypt;
+- RabbitMQ;
+- Kubernetes (HPA, ConfigMaps e Secrets).
